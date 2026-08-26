@@ -1,0 +1,5 @@
+node_modules/
+dist/
+Rysunki/
+package-lock.json
+araverse-project-brief.md
