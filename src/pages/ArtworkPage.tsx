@@ -5,7 +5,11 @@ import { getColorModeLabel } from '../utils/colorMode'
 import { toSlug } from '../utils/toSlug'
 import styles from './ArtworkPage.module.css'
 
-export function ArtworkPage() {
+interface ArtworkPageProps {
+  isModal?: boolean
+}
+
+export function ArtworkPage({ isModal = false }: ArtworkPageProps) {
   const { artworkId } = useParams()
   const location = useLocation()
   const navigate = useNavigate()
@@ -30,19 +34,20 @@ export function ArtworkPage() {
 
   return (
     <article className={styles.page}>
-      {sourceLabel ? (
-        <button
-          className={styles.backLink}
-          type="button"
-          onClick={() => navigate(-1)}
-        >
-          ← Back to {sourceLabel}
-        </button>
-      ) : (
-        <NavLink className={styles.backLink} to="/portfolio">
-          ← Back to portfolio
-        </NavLink>
-      )}
+      {!isModal &&
+        (sourceLabel ? (
+          <button
+            className={styles.backLink}
+            type="button"
+            onClick={() => navigate(-1)}
+          >
+            ← Back to {sourceLabel}
+          </button>
+        ) : (
+          <NavLink className={styles.backLink} to="/portfolio">
+            ← Back to portfolio
+          </NavLink>
+        ))}
 
       <div className={styles.viewer}>
         <div className={styles.imageFrame}>

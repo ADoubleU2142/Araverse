@@ -1,4 +1,5 @@
-import { createBrowserRouter } from 'react-router'
+import { Route, Routes, useLocation, type Location } from 'react-router'
+import { ArtworkLightbox } from './components/artwork/ArtworkLightbox'
 import { AppShell } from './layouts/AppShell'
 import { ArtworkPage } from './pages/ArtworkPage'
 import { CollectionPage } from './pages/CollectionPage'
@@ -11,51 +12,40 @@ import { TechniquesPage } from './pages/TechniquesPage'
 import { YearPage } from './pages/YearPage'
 import { YearsPage } from './pages/YearsPage'
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <AppShell />,
-    children: [
-      {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: 'portfolio',
-        element: <PortfolioPage />,
-      },
-      {
-        path: 'collections',
-        element: <CollectionsPage />,
-      },
-      {
-        path: 'collections/:collectionSlug',
-        element: <CollectionPage />,
-      },
-      {
-        path: 'years',
-        element: <YearsPage />,
-      },
-      {
-        path: 'years/:year',
-        element: <YearPage />,
-      },
-      {
-        path: 'techniques',
-        element: <TechniquesPage />,
-      },
-      {
-        path: 'techniques/:techniqueSlug',
-        element: <TechniquePage />,
-      },
-      {
-        path: 'search',
-        element: <SearchPage />,
-      },
-      {
-        path: 'artworks/:artworkId',
-        element: <ArtworkPage />,
-      },
-    ],
-  },
-])
+interface ArtworkRouteState {
+  backgroundLocation?: Location
+}
+
+export function AppRouter() {
+  const location = useLocation()
+  const state = location.state as ArtworkRouteState | null
+  const backgroundLocation = state?.backgroundLocation
+
+  return (
+    <>
+      <Routes location={backgroundLocation ?? location}>
+        <Route path="/" element={<AppShell />}>
+          <Route index element={<HomePage />} />
+          <Route path="portfolio" element={<PortfolioPage />} />
+          <Route path="collections" element={<CollectionsPage />} />
+          <Route
+            path="collections/:collectionSlug"
+            element={<CollectionPage />}
+          />
+          <Route path="years" element={<YearsPage />} />
+          <Route path="years/:year" element={<YearPage />} />
+          <Route path="techniques" element={<TechniquesPage />} />
+          <Route path="techniques/:techniqueSlug" element={<TechniquePage />} />
+          <Route path="search" element={<SearchPage />} />
+          <Route path="artworks/:artworkId" element={<ArtworkPage />} />
+        </Route>
+      </Routes>
+
+      {backgroundLocation && (
+        <Routes>
+          <Route path="/artworks/:artworkId" element={<ArtworkLightbox />} />
+        </Routes>
+      )}
+    </>
+  )
+}

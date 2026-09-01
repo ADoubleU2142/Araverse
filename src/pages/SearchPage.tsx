@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type FormEvent } from 'react'
 import {
-  Form,
   NavLink,
   useLocation,
   useNavigate,
@@ -47,6 +46,26 @@ export function SearchPage() {
     }
   }, [location.pathname, location.search, navigate, navigationState])
 
+  function handleSearchSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+    const nextQuery = String(formData.get('q') ?? '').trim()
+    const nextColorMode = formData.get('colorMode')
+    const nextSearchParams = new URLSearchParams()
+
+    if (nextQuery) {
+      nextSearchParams.set('q', nextQuery)
+    }
+
+    if (typeof nextColorMode === 'string' && isColorMode(nextColorMode)) {
+      nextSearchParams.set('colorMode', nextColorMode)
+    }
+
+    const nextSearch = nextSearchParams.toString()
+    void navigate(nextSearch ? `/search?${nextSearch}` : '/search')
+  }
+
   return (
     <section className={styles.page} aria-labelledby="search-title">
       <header className={styles.header}>
@@ -59,7 +78,7 @@ export function SearchPage() {
         </p>
       </header>
 
-      <Form className={styles.form} role="search" method="get" action="/search">
+      <form className={styles.form} role="search" onSubmit={handleSearchSubmit}>
         <label className={styles.label} htmlFor="artwork-search">
           Search titles and subjects
         </label>
@@ -82,7 +101,7 @@ export function SearchPage() {
         {colorMode && (
           <input type="hidden" name="colorMode" value={colorMode} />
         )}
-      </Form>
+      </form>
 
       {colorModeLabel && (
         <div className={styles.activeFilter}>
