@@ -1,0 +1,41 @@
+.page {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 28rem);
+  align-items: end;
+  gap: 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.introduction {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 44rem) {
+  .header {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 1.25rem;
+  }
+}
