@@ -1,5 +1,8 @@
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router'
+import { MetadataPills } from '../components/artwork/MetadataPills'
 import { artworks } from '../data/artworks'
+import { getColorModeLabel } from '../utils/colorMode'
+import { toSlug } from '../utils/toSlug'
 import styles from './ArtworkPage.module.css'
 
 export function ArtworkPage() {
@@ -59,16 +62,66 @@ export function ArtworkPage() {
           <dl className={styles.metadata}>
             <div>
               <dt>Techniques</dt>
-              <dd>{artwork.techniques.join(', ')}</dd>
+              <dd>
+                <MetadataPills
+                  items={artwork.techniques}
+                  getTo={(technique) => `/techniques/${toSlug(technique)}`}
+                  getAriaLabel={(technique) =>
+                    `Browse artworks created with ${technique}`
+                  }
+                />
+              </dd>
             </div>
             <div>
               <dt>Subjects</dt>
-              <dd>{artwork.subjects.join(', ')}</dd>
+              <dd>
+                <MetadataPills
+                  items={artwork.subjects}
+                  getTo={(subject) =>
+                    `/search?q=${encodeURIComponent(subject)}`
+                  }
+                  getAriaLabel={(subject) =>
+                    `Search for artworks with subject ${subject}`
+                  }
+                />
+              </dd>
             </div>
+            {artwork.collections.length > 0 && (
+              <div>
+                <dt>Collections</dt>
+                <dd>
+                  <MetadataPills
+                    items={artwork.collections}
+                    getTo={(collection) => `/collections/${toSlug(collection)}`}
+                    getAriaLabel={(collection) =>
+                      `Browse the ${collection} collection`
+                    }
+                  />
+                </dd>
+              </div>
+            )}
+            {artwork.fanWorkType && (
+              <div>
+                <dt>Type</dt>
+                <dd>{artwork.fanWorkType.replaceAll('-', ' ')}</dd>
+              </div>
+            )}
+            {artwork.source && (
+              <div>
+                <dt>Source</dt>
+                <dd>{artwork.source}</dd>
+              </div>
+            )}
             {artwork.colorMode && (
               <div>
                 <dt>Color mode</dt>
-                <dd>{artwork.colorMode.replaceAll('-', ' ')}</dd>
+                <dd>
+                  <MetadataPills
+                    items={[getColorModeLabel(artwork.colorMode)]}
+                    getTo={() => `/search?colorMode=${artwork.colorMode}`}
+                    getAriaLabel={(colorMode) => `Browse ${colorMode} artworks`}
+                  />
+                </dd>
               </div>
             )}
           </dl>

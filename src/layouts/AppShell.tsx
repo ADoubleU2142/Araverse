@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router'
+import { MobileNavigation } from '../components/navigation/MobileNavigation'
 import { ScrollToTop } from '../components/navigation/ScrollToTop'
 import styles from './AppShell.module.css'
 
@@ -54,7 +55,18 @@ export function AppShell() {
           >
             Techniques
           </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${styles.navLink} ${isActive ? styles.activeNavLink : ''}`
+            }
+            to="/search"
+            state={{ focusSearch: true }}
+          >
+            Search
+          </NavLink>
         </nav>
+
+        <MobileNavigation />
 
         <span className={styles.mode}>Guest portfolio</span>
       </header>
