@@ -1,20 +1,12 @@
 import { ArtworkGallery } from '../components/artwork/ArtworkGallery'
 import { artworks } from '../data/artworks'
+import { getGuestVisibleArtworks } from '../data/artworkSelectors'
 import styles from './PortfolioPage.module.css'
 
 export function PortfolioPage() {
-  const portfolioArtworks = artworks
-    .filter(
-      (artwork) =>
-        artwork.isPortfolio &&
-        artwork.visibility === 'public' &&
-        artwork.contentLevel !== 'mature',
-    )
-    .toSorted((first, second) =>
-      first.sortOrder === second.sortOrder
-        ? first.id.localeCompare(second.id)
-        : first.sortOrder - second.sortOrder,
-    )
+  const portfolioArtworks = getGuestVisibleArtworks(artworks).filter(
+    (artwork) => artwork.isPortfolio,
+  )
 
   return (
     <section className={styles.page} aria-labelledby="portfolio-title">
@@ -32,7 +24,11 @@ export function PortfolioPage() {
         </p>
       </header>
 
-      <ArtworkGallery artworks={portfolioArtworks} label="Portfolio artworks" />
+      <ArtworkGallery
+        artworks={portfolioArtworks}
+        label="Portfolio artworks"
+        sourceLabel="portfolio"
+      />
     </section>
   )
 }
