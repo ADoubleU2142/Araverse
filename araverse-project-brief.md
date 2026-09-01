@@ -4,7 +4,7 @@
 
 **Araverse** is a personal art archive and public artistic portfolio for organizing, browsing, searching, maintaining, and presenting artwork created over many years.
 
-The project originates from a real need: the artwork archive currently spans more than a decade and contains over 500 image files organized primarily by year. Older works are difficult to browse quickly or present coherently from a phone, photo gallery, or cloud drive.
+The project originates from a real need: the artwork archive currently spans more than a decade and contains 400 image files organized primarily by year. Older works are difficult to browse quickly or present coherently from a phone, photo gallery, or cloud drive.
 
 Araverse should provide one central, structured place for the archive while also exposing a curated public-facing portfolio.
 
@@ -49,7 +49,7 @@ The public portfolio should allow visitors to:
 The current archive:
 
 - begins in **2015**;
-- contains **500+ image files**;
+- contains **400 image files**;
 - is organized primarily into year folders;
 - contains artwork with many different aspect ratios;
 - includes both traditional and digital work;
@@ -469,7 +469,7 @@ Home is an introduction and overview rather than an All Artworks page.
 Possible content:
 
 - Araverse identity;
-- archive summary, e.g. `500+ artworks since 2015`;
+- archive summary, e.g. `400 artworks since 2015`;
 - search;
 - Portfolio / Featured works;
 - selected Collections;
@@ -612,7 +612,7 @@ Preferred workflow:
 7. classify groups through Bulk Mode;
 8. edit individual exceptions afterward.
 
-The owner must not complete 500 full forms manually.
+The owner must not complete hundreds of full forms manually.
 
 ## 31. Image optimization
 
