@@ -1,0 +1,74 @@
+.page {
+  display: grid;
+  max-width: 48rem;
+  min-height: min(36rem, 70vh);
+  margin-inline: auto;
+  text-align: center;
+  place-content: center;
+  justify-items: center;
+}
+
+.code {
+  margin: 0 0 1rem;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.description {
+  max-width: 34rem;
+  margin: 1.5rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  min-height: 2.75rem;
+  padding: 0.625rem 1rem;
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
+}
+
+.primaryAction {
+  color: var(--color-background);
+  font-weight: 700;
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.secondaryAction {
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+.primaryAction:hover,
+.secondaryAction:hover {
+  border-color: var(--color-accent);
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}

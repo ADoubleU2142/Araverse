@@ -5,6 +5,7 @@ import { ArtworkPage } from './pages/ArtworkPage'
 import { CollectionPage } from './pages/CollectionPage'
 import { CollectionsPage } from './pages/CollectionsPage'
 import { HomePage } from './pages/HomePage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { PortfolioPage } from './pages/PortfolioPage'
 import { SearchPage } from './pages/SearchPage'
 import { TechniquePage } from './pages/TechniquePage'
@@ -35,6 +36,7 @@ export function AppRouter() {
           <Route path="techniques/:techniqueSlug" element={<TechniquePage />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="artworks/:artworkId" element={<ArtworkPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
 

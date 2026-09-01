@@ -14,6 +14,7 @@ export function ArtworkLightbox() {
   const location = useLocation()
   const { artworkId } = useParams()
   const dialogRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
   const swipeStartRef = useRef<{
     pointerId: number
     x: number
@@ -84,10 +85,22 @@ export function ArtworkLightbox() {
     const previousBodyOverflow = document.body.style.overflow
 
     document.body.style.overflow = 'hidden'
-    dialogRef.current?.focus()
 
+    const focusFrame = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus()
+    })
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame)
+      document.body.style.overflow = previousBodyOverflow
+      previouslyFocusedElement?.focus()
+    }
+  }, [])
+
+  useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
+        event.preventDefault()
         navigate(-1)
       }
 
@@ -98,14 +111,36 @@ export function ArtworkLightbox() {
       if (event.key === 'ArrowRight' && nextArtworkId) {
         navigateToArtwork(nextArtworkId)
       }
+
+      if (event.key === 'Tab') {
+        const focusableElements =
+          dialogRef.current?.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          )
+
+        if (!focusableElements?.length) {
+          event.preventDefault()
+          dialogRef.current?.focus()
+          return
+        }
+
+        const firstElement = focusableElements[0]
+        const lastElement = focusableElements[focusableElements.length - 1]
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault()
+          lastElement.focus()
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault()
+          firstElement.focus()
+        }
+      }
     }
 
     document.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.body.style.overflow = previousBodyOverflow
       document.removeEventListener('keydown', handleKeyDown)
-      previouslyFocusedElement?.focus()
     }
   }, [navigate, navigateToArtwork, nextArtworkId, previousArtworkId])
 
@@ -122,6 +157,7 @@ export function ArtworkLightbox() {
         className={styles.backdrop}
         type="button"
         aria-label="Close artwork viewer"
+        tabIndex={-1}
         onClick={() => navigate(-1)}
       />
 
@@ -135,6 +171,7 @@ export function ArtworkLightbox() {
       >
         <button
           className={styles.closeButton}
+          ref={closeButtonRef}
           type="button"
           aria-label="Close artwork viewer"
           onClick={() => navigate(-1)}
