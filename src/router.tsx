@@ -5,6 +5,7 @@ import { CollectionPage } from './pages/CollectionPage'
 import { CollectionsPage } from './pages/CollectionsPage'
 import { HomePage } from './pages/HomePage'
 import { PortfolioPage } from './pages/PortfolioPage'
+import { SearchPage } from './pages/SearchPage'
 import { TechniquePage } from './pages/TechniquePage'
 import { TechniquesPage } from './pages/TechniquesPage'
 import { YearPage } from './pages/YearPage'
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: 'techniques/:techniqueSlug',
         element: <TechniquePage />,
+      },
+      {
+        path: 'search',
+        element: <SearchPage />,
       },
       {
         path: 'artworks/:artworkId',

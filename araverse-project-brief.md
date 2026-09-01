@@ -224,7 +224,9 @@ An Artwork may contain:
 - color mode;
 - techniques;
 - subjects;
-- collections.
+- collections;
+- fan work type;
+- source/inspiration, where applicable.
 
 ### Artwork flags
 
@@ -307,6 +309,33 @@ Possible states:
 - `Personal`.
 
 A Personal gift is not automatically Private.
+
+## 12a. Fan work type and source
+
+Fan work type is an optional classification for fan art based on a fictional
+property or a fan portrait of a real person.
+
+Possible states:
+
+- `Fan Art`;
+- `Fan Portrait`.
+
+When Fan work type is unset, Araverse makes no claim that the Artwork is fully
+original. It may be original, referenced, traced, remixed, or otherwise
+unclassified. No origin label is displayed in that case.
+
+Source is optional and may identify the relevant character, franchise, person,
+band, game, animation, comic, or other inspiration.
+
+Examples:
+
+- `Riddler · Batman`;
+- `Cuphead`;
+- `Dan Reynolds · Imagine Dragons`.
+
+Fan work type and Source are independent from Subjects. Subjects continue to
+describe what appears in the Artwork, while Fan work type and Source describe
+the relevant fan-work context or inspiration.
 
 ## 13. Techniques
 
@@ -555,6 +584,7 @@ Search should primarily include:
 
 - Subjects;
 - Titles;
+- Source;
 - optionally Notes.
 
 Most works do not have titles, so Subject search is essential.
@@ -570,6 +600,7 @@ Depending on context, useful filters may include:
 - Subject;
 - Color Mode;
 - Collection;
+- Fan Work Type;
 - Portfolio;
 - Favorite;
 - Content Level;
@@ -641,9 +672,10 @@ Useful bulk operations include:
 - set Visibility;
 - set/unset Portfolio;
 - set/unset Favorite;
-- set Gift Type.
+- set Gift Type;
+- set/unset Fan Work Type.
 
-Title, exact date, and Note remain primarily individual properties.
+Title, exact date, Note, and Source remain primarily individual properties.
 
 ## 33. Adding a single artwork
 
@@ -673,7 +705,9 @@ Optional input:
 - Portfolio;
 - Visibility;
 - Gift Type;
-- Content Level.
+- Content Level;
+- Fan Work Type;
+- Source.
 
 New Techniques and Subjects can be created directly from this workflow.
 
@@ -702,7 +736,7 @@ This section describes the logical model only and intentionally does not define 
 - An Artwork may have multiple Techniques.
 - An Artwork may have multiple Subjects.
 - An Artwork may belong to multiple Collections.
-- Portfolio, Favorite, Visibility, Content Level, Gift Type, Color Mode, year, date, title, and note belong directly to Artwork or its immediate metadata model.
+- Portfolio, Favorite, Visibility, Content Level, Gift Type, Fan Work Type, Source, Color Mode, year, date, title, and note belong directly to Artwork or its immediate metadata model.
 - A Year may have one optional custom cover.
 - A Collection may have one optional custom cover.
 - Years, Collections, Techniques, and optional Favorites may require a public-presentation state so the owner can decide whether they appear in Guest Mode.
@@ -966,6 +1000,8 @@ The MVP includes:
 - Public/Private visibility;
 - Safe/Sensitive/Mature levels;
 - Gift Type;
+- Fan Work Type;
+- Source;
 - owner Show Private toggle;
 - owner Show Mature toggle;
 - curated Guest portfolio;

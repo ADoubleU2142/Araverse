@@ -83,8 +83,7 @@
   }
 
   .navigation {
-    justify-content: flex-start;
-    overflow-x: auto;
+    display: none;
   }
 
   .mode {
