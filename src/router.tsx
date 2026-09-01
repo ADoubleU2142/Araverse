@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, type Location } from 'react-router'
+import { Route, Routes, useLocation } from 'react-router'
 import { ArtworkLightbox } from './components/artwork/ArtworkLightbox'
 import { AppShell } from './layouts/AppShell'
 import { ArtworkPage } from './pages/ArtworkPage'
@@ -11,14 +11,11 @@ import { TechniquePage } from './pages/TechniquePage'
 import { TechniquesPage } from './pages/TechniquesPage'
 import { YearPage } from './pages/YearPage'
 import { YearsPage } from './pages/YearsPage'
-
-interface ArtworkRouteState {
-  backgroundLocation?: Location
-}
+import type { ArtworkNavigationState } from './types/artworkNavigation'
 
 export function AppRouter() {
   const location = useLocation()
-  const state = location.state as ArtworkRouteState | null
+  const state = location.state as ArtworkNavigationState | null
   const backgroundLocation = state?.backgroundLocation
 
   return (

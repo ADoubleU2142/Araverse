@@ -1,19 +1,26 @@
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router'
 import { MetadataPills } from '../components/artwork/MetadataPills'
 import { artworks } from '../data/artworks'
+import type { ArtworkNavigationState } from '../types/artworkNavigation'
 import { getColorModeLabel } from '../utils/colorMode'
 import { toSlug } from '../utils/toSlug'
 import styles from './ArtworkPage.module.css'
 
 interface ArtworkPageProps {
   isModal?: boolean
+  onPrevious?: () => void
+  onNext?: () => void
 }
 
-export function ArtworkPage({ isModal = false }: ArtworkPageProps) {
+export function ArtworkPage({
+  isModal = false,
+  onPrevious,
+  onNext,
+}: ArtworkPageProps) {
   const { artworkId } = useParams()
   const location = useLocation()
   const navigate = useNavigate()
-  const navigationState = location.state as { sourceLabel?: string } | null
+  const navigationState = location.state as ArtworkNavigationState | null
   const sourceLabel = navigationState?.sourceLabel
   const artwork = artworks.find(
     (item) =>
@@ -63,6 +70,20 @@ export function ArtworkPage({ isModal = false }: ArtworkPageProps) {
           <h1 className={styles.title} id="artwork-title">
             {artwork.title ?? `Untitled, ${artwork.year}`}
           </h1>
+
+          {isModal && (onPrevious || onNext) && (
+            <nav
+              className={styles.viewerNavigation}
+              aria-label="Artwork viewer"
+            >
+              <button type="button" onClick={onPrevious} disabled={!onPrevious}>
+                ← Previous
+              </button>
+              <button type="button" onClick={onNext} disabled={!onNext}>
+                Next →
+              </button>
+            </nav>
+          )}
 
           <dl className={styles.metadata}>
             <div>

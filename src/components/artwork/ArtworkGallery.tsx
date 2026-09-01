@@ -14,6 +14,7 @@ export function ArtworkGallery({
   sourceLabel,
 }: ArtworkGalleryProps) {
   const location = useLocation()
+  const artworkIds = artworks.map((artwork) => artwork.id)
 
   return (
     <ul className={styles.gallery} aria-label={label}>
@@ -22,7 +23,7 @@ export function ArtworkGallery({
           <NavLink
             className={styles.cardLink}
             to={`/artworks/${artwork.id}`}
-            state={{ sourceLabel, backgroundLocation: location }}
+            state={{ sourceLabel, backgroundLocation: location, artworkIds }}
             aria-label={`Open artwork from ${artwork.year}`}
           >
             <article className={styles.card}>

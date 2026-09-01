@@ -34,6 +34,7 @@
   border: 1px solid var(--color-border);
   border-radius: 0.875rem;
   box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.55);
+  touch-action: pan-y;
 }
 
 .closeButton {
