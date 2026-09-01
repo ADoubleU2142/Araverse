@@ -1,9 +1,13 @@
-import { NavLink, useParams } from 'react-router'
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router'
 import { artworks } from '../data/artworks'
 import styles from './ArtworkPage.module.css'
 
 export function ArtworkPage() {
   const { artworkId } = useParams()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const navigationState = location.state as { sourceLabel?: string } | null
+  const sourceLabel = navigationState?.sourceLabel
   const artwork = artworks.find(
     (item) =>
       item.id === artworkId &&
@@ -23,9 +27,19 @@ export function ArtworkPage() {
 
   return (
     <article className={styles.page}>
-      <NavLink className={styles.backLink} to="/portfolio">
-        ← Back to portfolio
-      </NavLink>
+      {sourceLabel ? (
+        <button
+          className={styles.backLink}
+          type="button"
+          onClick={() => navigate(-1)}
+        >
+          ← Back to {sourceLabel}
+        </button>
+      ) : (
+        <NavLink className={styles.backLink} to="/portfolio">
+          ← Back to portfolio
+        </NavLink>
+      )}
 
       <div className={styles.viewer}>
         <div className={styles.imageFrame}>

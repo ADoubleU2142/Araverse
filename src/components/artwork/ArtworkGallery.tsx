@@ -5,9 +5,14 @@ import styles from './ArtworkGallery.module.css'
 interface ArtworkGalleryProps {
   artworks: Artwork[]
   label: string
+  sourceLabel: string
 }
 
-export function ArtworkGallery({ artworks, label }: ArtworkGalleryProps) {
+export function ArtworkGallery({
+  artworks,
+  label,
+  sourceLabel,
+}: ArtworkGalleryProps) {
   return (
     <ul className={styles.gallery} aria-label={label}>
       {artworks.map((artwork, index) => (
@@ -15,6 +20,7 @@ export function ArtworkGallery({ artworks, label }: ArtworkGalleryProps) {
           <NavLink
             className={styles.cardLink}
             to={`/artworks/${artwork.id}`}
+            state={{ sourceLabel }}
             aria-label={`Open artwork from ${artwork.year}`}
           >
             <article className={styles.card}>

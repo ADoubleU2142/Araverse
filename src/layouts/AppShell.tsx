@@ -1,9 +1,12 @@
 import { NavLink, Outlet } from 'react-router'
+import { ScrollToTop } from '../components/navigation/ScrollToTop'
 import styles from './AppShell.module.css'
 
 export function AppShell() {
   return (
     <div className={styles.shell}>
+      <ScrollToTop />
+
       <header className={styles.header}>
         <NavLink className={styles.brand} to="/" aria-label="Araverse home">
           Araverse
@@ -26,6 +29,30 @@ export function AppShell() {
             to="/portfolio"
           >
             Portfolio
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${styles.navLink} ${isActive ? styles.activeNavLink : ''}`
+            }
+            to="/years"
+          >
+            Years
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${styles.navLink} ${isActive ? styles.activeNavLink : ''}`
+            }
+            to="/collections"
+          >
+            Collections
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `${styles.navLink} ${isActive ? styles.activeNavLink : ''}`
+            }
+            to="/techniques"
+          >
+            Techniques
           </NavLink>
         </nav>
 
