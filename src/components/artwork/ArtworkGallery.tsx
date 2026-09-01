@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router'
+import { NavLink, useLocation } from 'react-router'
 import type { Artwork } from '../../types/artwork'
 import styles from './ArtworkGallery.module.css'
 
@@ -13,6 +13,9 @@ export function ArtworkGallery({
   label,
   sourceLabel,
 }: ArtworkGalleryProps) {
+  const location = useLocation()
+  const artworkIds = artworks.map((artwork) => artwork.id)
+
   return (
     <ul className={styles.gallery} aria-label={label}>
       {artworks.map((artwork, index) => (
@@ -20,7 +23,7 @@ export function ArtworkGallery({
           <NavLink
             className={styles.cardLink}
             to={`/artworks/${artwork.id}`}
-            state={{ sourceLabel }}
+            state={{ sourceLabel, backgroundLocation: location, artworkIds }}
             aria-label={`Open artwork from ${artwork.year}`}
           >
             <article className={styles.card}>

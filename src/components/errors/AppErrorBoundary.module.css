@@ -1,0 +1,79 @@
+.page {
+  display: grid;
+  min-height: 100vh;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  place-items: center;
+}
+
+.message {
+  width: min(100%, 48rem);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.description {
+  max-width: 38rem;
+  margin: 1.5rem auto 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  min-height: 2.75rem;
+  padding: 0.625rem 1rem;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
+}
+
+.primaryAction {
+  color: var(--color-background);
+  font-weight: 700;
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.secondaryAction {
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+.primaryAction:hover,
+.secondaryAction:hover {
+  border-color: var(--color-accent-hover);
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
