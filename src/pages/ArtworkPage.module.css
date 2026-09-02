@@ -41,6 +41,11 @@
   object-fit: contain;
 }
 
+.imageContainer {
+  width: 100%;
+  min-height: inherit;
+}
+
 .details {
   position: sticky;
   top: 6rem;

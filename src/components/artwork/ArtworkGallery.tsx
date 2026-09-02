@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from 'react-router'
 import type { Artwork } from '../../types/artwork'
+import { ArtworkImage } from './ArtworkImage'
 import styles from './ArtworkGallery.module.css'
 
 interface ArtworkGalleryProps {
@@ -27,12 +28,12 @@ export function ArtworkGallery({
             aria-label={`Open artwork from ${artwork.year}`}
           >
             <article className={styles.card}>
-              <img
-                className={styles.image}
+              <ArtworkImage
                 src={artwork.imageSrc}
                 alt={artwork.alt}
+                imageClassName={styles.image}
+                containerClassName={styles.imageFrame}
                 loading={index < 2 ? 'eager' : 'lazy'}
-                decoding="async"
               />
 
               <div className={styles.metadata}>
