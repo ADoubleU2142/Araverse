@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router'
 import { MobileNavigation } from '../components/navigation/MobileNavigation'
+import { DocumentTitle } from '../components/navigation/DocumentTitle'
 import { ScrollToTop } from '../components/navigation/ScrollToTop'
 import styles from './AppShell.module.css'
 
@@ -7,6 +8,11 @@ export function AppShell() {
   return (
     <div className={styles.shell}>
       <ScrollToTop />
+      <DocumentTitle />
+
+      <a className={styles.skipLink} href="#main-content">
+        Skip to content
+      </a>
 
       <header className={styles.header}>
         <NavLink className={styles.brand} to="/" aria-label="Araverse home">
@@ -71,7 +77,7 @@ export function AppShell() {
         <span className={styles.mode}>Guest portfolio</span>
       </header>
 
-      <main className={styles.main}>
+      <main className={styles.main} id="main-content" tabIndex={-1}>
         <Outlet />
       </main>
 
