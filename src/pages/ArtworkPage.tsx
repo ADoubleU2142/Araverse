@@ -1,5 +1,6 @@
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router'
 import { MetadataPills } from '../components/artwork/MetadataPills'
+import { ArtworkImage } from '../components/artwork/ArtworkImage'
 import { artworks } from '../data/artworks'
 import type { ArtworkNavigationState } from '../types/artworkNavigation'
 import { getColorModeLabel } from '../utils/colorMode'
@@ -58,10 +59,13 @@ export function ArtworkPage({
 
       <div className={styles.viewer}>
         <div className={styles.imageFrame}>
-          <img
-            className={styles.image}
+          <ArtworkImage
+            key={artwork.id}
             src={artwork.imageSrc}
             alt={artwork.alt}
+            imageClassName={styles.image}
+            containerClassName={styles.imageContainer}
+            loading="eager"
           />
         </div>
 

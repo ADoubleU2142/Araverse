@@ -43,10 +43,13 @@
   transform: translateY(-2px);
 }
 
+.imageFrame {
+  width: 100%;
+}
+
 .image {
   width: 100%;
   height: auto;
-  background: var(--color-surface);
 }
 
 .metadata {
